@@ -16,7 +16,11 @@ async function gen_akamai(data){
 
 	for(; i < 30; i++){
 
-		fnl(data);
+		queueMicrotask(() => {
+			
+			fnl(data)
+
+		});
 
 	};
 
@@ -32,8 +36,12 @@ app.whenReady().then(async () => {
 
 process.on('uncaughtException', async () => {
 
-	console.log('error');
+	//console.log('error');
 
-	fnl(data);
+	queueMicrotask(() => {
+
+		fnl(data)
+
+	});
 
 });

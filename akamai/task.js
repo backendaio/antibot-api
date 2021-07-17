@@ -99,7 +99,7 @@ async function fnl(data) {
 
     } catch {
 
-        console.log('error');
+        //console.log('error');
 
     };
 
