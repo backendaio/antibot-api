@@ -1,0 +1,110 @@
+const {
+    ipcRenderer
+} = require('electron');
+const akamai = require('./akamai.js');
+const {
+    client
+} = require('./client.js');
+const fs = require('fs');
+const proxies_data = fs.readFileSync('./akamai/proxies.txt', 'utf8');
+const proxies = proxies_data.split(/\r?\n/);
+
+function random(min, max) {
+
+    return Math.floor(Math.random() * (max - min) + min);
+
+};
+
+async function fnl(data) {
+
+    try {
+
+        var device_index = random(0, 3000);
+        var proxy_index = random(0, proxies.length - 1);
+        var api = new akamai(device_index, 'fnl');
+        var request = new client(proxies[proxy_index]);
+        //var request = new client(null);
+
+        var get = await request.request({
+
+            method: 'get',
+            url: 'https://www.finishline.com/',
+            headers: {
+
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-language": "en",
+                "cache-control": "no-cache",
+                "pragma": "no-cache",
+                "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-fetch-dest": "document",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "none",
+                "sec-fetch-user": "?1",
+                "upgrade-insecure-requests": "1",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "mode": "cors",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
+
+            },
+            credentials: 'include'
+
+        });
+
+        var cookies = get.headers['set-cookie'].find(b => b.startsWith('_abck'));
+        cookies = cookies.split(';');
+        cookies = cookies.find(b => b.startsWith('_abck'));
+        cookies = cookies.replace('_abck=', '');
+
+        var sensor_data = api.generate(cookies, device_index);
+        api.reset(data);
+
+        var post = await request.request({
+
+            method: 'post',
+            url: 'https://www.finishline.com/E9qC8Uo5IhIW/OKvMR4/2_O828/9QYONG0zi37D/QSkuAwE/cl1yY/BVHMF0',
+            headers: {
+
+                "accept": "*/*",
+                "accept-language": "en",
+                "cache-control": "no-cache",
+                "content-type": "text/plain;charset=UTF-8",
+                "pragma": "no-cache",
+                "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-site": "same-origin",
+                "referrer": "https://www.finishline.com/",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "mode": "cors",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
+
+            },
+            credentials: 'include',
+            body: `{\"sensor_data\":\"${sensor_data}\"}`
+
+        });
+
+        var cookies = post.headers['set-cookie'].find(b => b.startsWith('_abck'));
+        cookies = cookies.split(';');
+        cookies = cookies.find(b => b.startsWith('_abck'));
+        cookies = cookies.replace('_abck=', '');
+
+        if (cookies.endsWith('==~-1~-1~-1') && cookies.length == 533) {
+
+            process.env.cookies++
+            console.log(`cookie counter :`, process.env.cookies);
+
+        };
+
+    } catch {
+
+        console.log('error');
+
+    };
+
+    await fnl(data);
+
+};
+
+module.exports.fnl = fnl;

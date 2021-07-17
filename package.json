@@ -1,19 +1,15 @@
 {
-  "name": "antibot-api",
+  "name": "antibots",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./akamai/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/backendaio/antibot-api.git"
+    "start": "electron ."
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/backendaio/antibot-api/issues"
-  },
-  "homepage": "https://github.com/backendaio/antibot-api#readme"
+  "dependencies": {
+    "electron": "^13.1.7",
+    "uuid": "^8.3.2"
+  }
 }
