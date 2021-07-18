@@ -114,114 +114,119 @@ class client {
 	request(options = { method : null , url : null , headers : null , body : null, credentials : null , follow_redirect : false , redirect : null }){
 
 		return new Promise((resolve , reject) => {
+			
+			queueMicrotask(() => {
 
-			var status_code = null;
-			var response_headers = null;
-			var response_data = null;
-			var redirect = false;
-			response_data = '';
 
-			try {
+				var status_code = null;
+				var response_headers = null;
+				var response_data = null;
+				var redirect = false;
+				response_data = '';
 
-				var request = net.request({
+				try {
 
-					method : options['method'],
-					url : options['url'],
-					session : this.session,
-					useSessionCookies : true,
-					headers : options['headers'],
-					credentials : options['credentials'],
-					redirect : options['redirect']
+					var request = net.request({
 
-				});
+						method : options['method'],
+						url : options['url'],
+						session : this.session,
+						useSessionCookies : true,
+						headers : options['headers'],
+						credentials : options['credentials'],
+						redirect : options['redirect']
 
-				if(this.task_proxy){
+					});
 
-					if(this.proxy_string.length == 4){
+					if(this.task_proxy){
 
-						request.on('login', (authInfo, callback) => {
+						if(this.proxy_string.length == 4){
 
-							callback(this.proxy_string[2], this.proxy_string[3]);
+							request.on('login', (authInfo, callback) => {
+
+								callback(this.proxy_string[2], this.proxy_string[3]);
+
+							});
+
+						};
+
+					};
+
+					if(options['body']){
+
+						request.write(options['body']);
+
+					};
+
+					if(options['follow_redirect']){
+
+
+						request.on('redirect', (response) => {
+
+							redirect = true;
+							request.followRedirect();
 
 						});
 
 					};
 
-				};
+					request.on('response', (response) => {
 
-				if(options['body']){
+						status_code = response.statusCode; 
+						response_headers = response.headers;
 
-					request.write(options['body']);
+						response.on('error', (error) => {
 
-				};
+							reject({
 
-				if(options['follow_redirect']){
+								error : true,
+								reason : error
 
+							});
 
-					request.on('redirect', (response) => {
+						});
 
-						redirect = true;
-						request.followRedirect();
+						response.on('data',(chunk) => {
+							
+							response_data += chunk.toString();
 
-					});
+						});
 
-				};
+						response.on('end', () => {
 
-				request.on('response', (response) => {
+							resolve({
 
-					status_code = response.statusCode; 
-					response_headers = response.headers;
+				                options : options,
+				                redirect : redirect,
+								data : response_data,
+								headers : response_headers, 
+								status_code : status_code,
+								error : false 
 
-					response.on('error', (error) => {
-
-						reject({
-
-							error : true,
-							reason : error
+							});
 
 						});
 
 					});
 
-					response.on('data',(chunk) => {
-						
-						response_data += chunk.toString();
+					request.end();
+
+				} catch {
+
+					reject({
+
+				        options : options,
+				        redirect : redirect,
+						data : response_data,
+						headers : response_headers, 
+						status_code : status_code,
+						error : true 
 
 					});
 
-					response.on('end', () => {
+				};
 
-						resolve({
-
-			                options : options,
-			                redirect : redirect,
-							data : response_data,
-							headers : response_headers, 
-							status_code : status_code,
-							error : false 
-
-						});
-
-					});
-
-				});
-
-				request.end();
-
-			} catch {
-
-				reject({
-
-			        options : options,
-			        redirect : redirect,
-					data : response_data,
-					headers : response_headers, 
-					status_code : status_code,
-					error : true 
-
-				});
-
-			};
+			});
 
 		});
 
