@@ -18,7 +18,7 @@ async function gen_akamai(data){
 
 		queueMicrotask(() => {
 
-			fnl(data);
+			dsg(data);
 
 		});
 
