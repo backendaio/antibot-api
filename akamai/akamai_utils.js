@@ -327,16 +327,20 @@ bmak.getdurl = function() {
 
 }
 
-bmak.updatet = function() {
+bmak.updatet = function(amount) {
     //return bmak.get_cf_date() - bmak.start_ts;
 
     if (!bmak.timestamp) {
 
-        bmak.timestamp = bmak.random(1000, 3000);
+        bmak.timestamp = bmak.random(100, 1500);
 
-    } else {
+    } else if(amount){
 
-        bmak.timestamp += bmak.random(1, 1000);
+        bmak.timestamp += amount;
+
+    }else {
+
+        bmak.timestamp += bmak.random(1, 300);
 
     };
 

@@ -23,7 +23,7 @@ async function fnl(data) {
         var proxy_index = random(0, proxies.length - 1);
         var api = new akamai(device_index, 'fnl');
         var request = new client(proxies[proxy_index]);
-        //var request = new client(null);
+        var request = new client(null);
 
         var get = await request.request({
 

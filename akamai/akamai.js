@@ -1,5 +1,6 @@
 var bmak = require('./akamai_utils.js');
 const devices = require('./devices.json');
+const { gen_kact } = require('./kact.js');
 
 class akamai{
 
@@ -12,6 +13,11 @@ class akamai{
 	};
 
 	generate(cookie, device_index, challenge){
+
+		//initialize bmak.timestamp
+		bmak.updatet();
+
+		gen_kact(bmak);
 
 		if(device_index){
 
@@ -172,3 +178,6 @@ class akamai{
 };
 
 module.exports = akamai;
+
+var api = new akamai(0, 'dsg');
+api.generate();
