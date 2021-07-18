@@ -45,10 +45,20 @@ function normal_event(bmak) {
 
 };
 
-function event_hold(bmak, hold_amount){
+function shift_event(event){
 
 	
-	
+};
+
+function meta_event(bmak){
+
+
+};
+
+function event_hold(bmak, hold_amount){
+
+
+
 };
 
 function normal_event_hold(bmak){
@@ -73,7 +83,7 @@ function gen_kact(bmak) {
 
     };
 
-   	normal_event(bmak);
+   	meta_event(bmak);
 
 };
 
