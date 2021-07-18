@@ -295,10 +295,15 @@ bmak.getforminfo = function() {
     //return null == bmak.ins && (bmak.ins = a), bmak.cns = a, t;
 
     var fnl_informinfo = "0,0,0,0,2402,310,0;0,0,0,0,1802,310,0;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,0;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,520,0;0,-1,0,0,-1,520,0;";
+    var dsg_informinfo = "0,-1,0,0,1227,-1,0;";
 
     if (bmak.site == 'fnl') {
 
         return fnl_informinfo;
+
+    } else if (bmak.site == 'dsg'){
+
+        return dsg_informinfo;
 
     };
 
@@ -308,11 +313,16 @@ bmak.getdurl = function() {
     //return bmak.enReadDocUrl ? document.URL.replace(/\\|"/g, "") : "";
 
     var fnl_url = 'https://www.finishline.com/';
+    var dsg_url = 'https://www.dickssportinggoods.com/';
 
     if (bmak.site == 'fnl') {
 
         return fnl_url;
 
+    } else {
+
+        return dsg_url;
+        
     };
 
 }

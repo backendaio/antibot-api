@@ -1,5 +1,5 @@
 const { app, ipcMain } = require('electron');
-const { fnl } = require('./task.js');
+const { fnl, dsg } = require('./task.js');
 const bmak = require('./akamai_utils.js');
 
 var data = {};
@@ -14,11 +14,11 @@ Object.keys(bmak).map(b => {
 
 async function gen_akamai(data){
 
-	for(; i < 30; i++){
+	for(; i < 1; i++){
 
 		queueMicrotask(() => {
-			
-			fnl(data)
+
+			fnl(data);
 
 		});
 
@@ -36,11 +36,9 @@ app.whenReady().then(async () => {
 
 process.on('uncaughtException', async () => {
 
-	//console.log('error');
-
 	queueMicrotask(() => {
 
-		fnl(data)
+		fnl(data);
 
 	});
 
