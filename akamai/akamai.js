@@ -15,9 +15,9 @@ class akamai{
 	generate(cookie, device_index, challenge){
 
 		//initialize bmak.timestamp
-		bmak.updatet();
+		//bmak.updatet();
 
-		gen_kact(bmak);
+		//gen_kact(bmak);
 
 		if(device_index){
 
