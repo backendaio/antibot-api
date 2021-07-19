@@ -189,6 +189,12 @@ class akamai{
 
 	};
 
+	get(){
+
+		return bmak;
+		
+	};
+
 };
 
 module.exports = akamai;

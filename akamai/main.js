@@ -16,7 +16,7 @@ async function gen_akamai(data){
 
 	var i = 0;
 
-	for(; i < 100; i++){
+	for(; i < 200; i++){
 
 		queueMicrotask(() => {
 
