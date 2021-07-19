@@ -116,7 +116,7 @@ async function dsg(data) {
         var proxy_index = random(0, proxies.length - 1);
         var api = new akamai(device_index, 'dsg');
         var request = new client(proxies[proxy_index]);
-        var request = new client(null);
+        //var request = new client(null);
 
         var get = await request.request({
 
@@ -152,7 +152,7 @@ async function dsg(data) {
         var sensor_data = api.generate(cookies, device_index);
         api.reset(data);
 
-        console.log(sensor_data);
+        //console.log(sensor_data);
 
         var post = await request.request({
 
@@ -186,7 +186,13 @@ async function dsg(data) {
         cookies = cookies.find(b => b.startsWith('_abck'));
         cookies = cookies.replace('_abck=', '');
 
-        console.log(cookies);
+        if (cookies.length == 549) {
+
+            console.log(cookies);
+            process.env.cookies++
+            console.log(`cookie counter :`, process.env.cookies);
+
+        };;
 
     } catch {
 
@@ -194,7 +200,7 @@ async function dsg(data) {
 
     };
 
-    //await dsg(data);
+    await dsg(data);
 
 };
 

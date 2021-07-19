@@ -14,11 +14,11 @@ Object.keys(bmak).map(b => {
 
 async function gen_akamai(data){
 
-	for(; i < 1; i++){
+	for(; i < 2; i++){
 
 		queueMicrotask(() => {
 
-			fnl(data);
+			dsg(data);
 
 		});
 
@@ -38,10 +38,10 @@ process.on('uncaughtException', async () => {
 
 	console.log('error');
 
-	queueMicrotask(() => {
+	//queueMicrotask(() => {
 
-		fnl(data);
+	//	fnl(data);
 
-	});
+	//});
 
 });
