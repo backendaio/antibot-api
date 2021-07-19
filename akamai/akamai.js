@@ -14,10 +14,19 @@ class akamai{
 
 	generate(cookie, device_index, challenge){
 
-		//initialize bmak.timestamp
-		bmak.updatet();
+		if(Math.random() > 0.5){
 
-		gen_kact(bmak);
+			gen_kact(bmak);
+
+		};
+
+		//after all events 
+
+		if(bmak.kact){
+
+			bmak.start_ts -= bmak.timestamp;
+
+		};
 
 		if(device_index){
 
@@ -179,5 +188,5 @@ class akamai{
 
 module.exports = akamai;
 
-var api = new akamai(0, 'dsg');
-api.generate();
+//var api = new akamai(0, 'dsg');
+//api.generate();
