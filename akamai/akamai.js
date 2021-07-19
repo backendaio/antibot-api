@@ -22,14 +22,6 @@ class akamai{
 
 		};
 
-		//after all events 
-
-		if(bmak.kact){
-
-			bmak.start_ts -= bmak.timestamp;
-
-		};
-
 		if(device_index){
 
 			this.device_index = device_index;
@@ -74,6 +66,13 @@ class akamai{
         var k = bmak.ff,
             l = k(80) + k(105) + k(90) + k(116) + k(69);
         var _ = a;
+
+        if(bmak.kact){
+
+			bmak.start_ts -= bmak.timestamp;
+
+		};
+
         var u = bmak.jrs(bmak.start_ts);
         var g = [bmak.ke_vel + 1, bmak.me_vel + 32, bmak.te_vel + 32, bmak.doe_vel, bmak.dme_vel, bmak.pe_vel, s, a, bmak.init_time, bmak.start_ts, bmak.fpcf.td, bmak.d2, bmak.ke_cnt, bmak.me_cnt, f, bmak.pe_cnt, bmak.te_cnt, _, bmak.ta, bmak.n_ck, e, bmak.ab(e), bmak.fpcf.rVal, bmak.fpcf.rCFP, p, l, u[0], u[1], v, h],
             w = g.join(",");
@@ -182,7 +181,11 @@ class akamai{
 
 	reset(data){
 
-		bmak = data;
+		Object.keys(data).map(s => {
+
+			bmak[s] = data[s];
+
+		});
 
 	};
 
