@@ -14,6 +14,8 @@ class akamai{
 
 	generate(cookie, device_index, challenge){
 
+		bmak.updatet();
+
 		if(Math.random() > 0.5){
 
 			gen_kact(bmak);

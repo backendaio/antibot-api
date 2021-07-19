@@ -104,7 +104,7 @@ async function fnl(data) {
 
     };
 
-    await fnl(data);
+    //await fnl(data);
 
 };
 
@@ -152,6 +152,8 @@ async function dsg(data) {
         var sensor_data = api.generate(cookies, device_index);
         api.reset(data);
 
+        console.log(sensor_data);
+
         var post = await request.request({
 
             method: 'post',
@@ -195,7 +197,7 @@ async function dsg(data) {
 
     };
 
-    await dsg(data);
+    //await dsg(data);
 
 };
 

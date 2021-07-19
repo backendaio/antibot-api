@@ -18,7 +18,7 @@ async function gen_akamai(data){
 
 		queueMicrotask(() => {
 
-			fnl(data);
+			dsg(data);
 
 		});
 
@@ -40,7 +40,7 @@ process.on('uncaughtException', async () => {
 
 	queueMicrotask(() => {
 
-		fnl(data);
+		dsg(data);
 
 	});
 

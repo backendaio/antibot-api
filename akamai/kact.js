@@ -258,20 +258,15 @@ function normal_event_hold(bmak, amount) {
 
 function gen_kact(bmak) {
 
-    if(!bmak.timestamp){
-
-        bmak.updatet();
-
-    };
-
     if (bmak.ke_cnt == bmak.ke_cnt_lmt) {
 
         return;
 
     };
 
-    var events = bmak.random(bmak.ke_cnt, bmak.ke_cnt_lmt);
-    events -= bmak.ke_cnt;
+    //var events = bmak.random(bmak.ke_cnt, bmak.ke_cnt_lmt);
+    //events -= bmak.ke_cnt;
+    var events = bmak.random(0,30);
 
     if (events <= 1) {
 
