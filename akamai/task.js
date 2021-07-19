@@ -92,7 +92,7 @@ async function fnl(data) {
 
         if (cookies.endsWith('==~-1~-1~-1') && cookies.length == 533) {
 
-            console.log(cookies);
+            //console.log(cookies);
             process.env.cookies++
             console.log(`cookie counter :`, process.env.cookies);
 
@@ -100,11 +100,11 @@ async function fnl(data) {
 
     } catch {
 
-        console.log('error');
+        //console.log('error');
 
     };
 
-    //await fnl(data);
+    await fnl(data);
 
 };
 
@@ -188,7 +188,7 @@ async function dsg(data) {
 
         if (cookies.length == 549) {
 
-            console.log(cookies);
+            //console.log(cookies);
             process.env.cookies++
             console.log(`cookie counter :`, process.env.cookies);
 
