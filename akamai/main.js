@@ -16,13 +16,9 @@ async function gen_akamai(data){
 
 	var i = 0;
 
-	for(; i < 200; i++){
+	for(; i < 30; i++){
 
-		queueMicrotask(() => {
-
-			dsg(data);
-
-		});
+		setImmediate(dsg, data);
 
 	};
 
@@ -38,12 +34,6 @@ process.on('uncaughtException', async () => {
 
 	//console.log('error');
 
-	//queueMicrotask(() => {
-
-	//	fnl(data);
-
-	//});
-
-	dsg(data);
+	setImmediate(dsg, data);
 
 });
