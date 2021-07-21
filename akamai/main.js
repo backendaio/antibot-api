@@ -16,7 +16,7 @@ async function gen_akamai(data){
 
 	var i = 0;
 
-	for(; i < 30; i++){
+	for(; i < 100; i++){
 
 		setImmediate(dsg, data);
 
