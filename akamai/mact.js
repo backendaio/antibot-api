@@ -153,9 +153,6 @@ function gen_mact(bmak){
 	var x = [];
 	var y = [];
 
-	//var amount = 30;
-	//var modulus = get_modulus(amount, bmak);
-
 	var amount = [0];
 	var length = [5,10,15,20,25,30,35,40,45,50];
 
@@ -203,12 +200,6 @@ function gen_mact(bmak){
 	};
 
 	Math.random() > 0.5 && (x.reverse() && y.reverse());
-
-	console.log(amount);
-	console.log(x);
-	console.log(y);
-
-	draw(x,y);
 
 };
 
