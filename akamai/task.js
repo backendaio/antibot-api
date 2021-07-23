@@ -23,7 +23,7 @@ async function fnl(data) {
         var proxy_index = random(0, proxies.length - 1);
         var api = new akamai(device_index, 'fnl');
         var request = new client(proxies[proxy_index]);
-        var request = new client(null);
+        //var request = new client(null);
 
         var get = await request.request({
 
@@ -62,7 +62,7 @@ async function fnl(data) {
         var post = await request.request({
 
             method: 'post',
-            url: 'https://www.finishline.com/E9qC8Uo5IhIW/OKvMR4/2_O828/9QYONG0zi37D/QSkuAwE/cl1yY/BVHMF0',
+            url: 'https://www.finishline.com/YKVQaDzB5vly5O_Z_LFj/b3J5DwrNQ1YY/THp9R0IHcgQ/cUEYZUZR/LCo',
             headers: {
 
                 "accept": "*/*",
@@ -94,7 +94,7 @@ async function fnl(data) {
 
             //console.log(cookies);
             process.env.cookies++
-            console.log(`cookie counter :`, process.env.cookies);
+            console.log(`FNL :`, process.env.cookies);
 
         };
 
@@ -190,7 +190,7 @@ async function dsg(data) {
 
             //console.log(cookies);
             process.env.cookies++
-            console.log(`cookie counter :`, process.env.cookies);
+            console.log(`DSG :`, process.env.cookies);
 
         };;
 

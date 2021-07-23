@@ -1,6 +1,7 @@
 var bmak = require('./akamai_utils.js');
 const devices = require('./devices.json');
 const { gen_kact } = require('./kact.js');
+const { gen_mact } = require('./mact.js');
 
 class akamai{
 
@@ -21,6 +22,8 @@ class akamai{
 			gen_kact(bmak);
 
 		};
+
+		gen_mact(bmak);
 
 		if(device_index){
 
@@ -199,5 +202,5 @@ class akamai{
 
 module.exports = akamai;
 
-//var api = new akamai(0, 'dsg');
-//api.generate();
+var api = new akamai(0, 'dsg');
+api.generate();

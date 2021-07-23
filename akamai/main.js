@@ -5,6 +5,7 @@ const bmak = require('./akamai_utils.js');
 var data = {};
 
 process.env.cookies = 0;
+var i = 0;
 
 Object.keys(bmak).map(b => {
 
@@ -14,11 +15,9 @@ Object.keys(bmak).map(b => {
 
 async function gen_akamai(data){
 
-	var i = 0;
+	for(; i < 50; i++){
 
-	for(; i < 100; i++){
-
-		setImmediate(dsg, data);
+		setImmediate(fnl, data);
 
 	};
 
@@ -33,7 +32,7 @@ app.whenReady().then(async () => {
 process.on('uncaughtException', async () => {
 
 	//console.log('error');
-
-	setImmediate(dsg, data);
+	i--;
+	gen_akamai(data);
 
 });
