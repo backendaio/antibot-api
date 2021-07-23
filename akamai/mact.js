@@ -1,6 +1,6 @@
 const { draw } = require('./mact_draw.js');
 
-function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
+function curve(bmak, mode, starting_x, starting_y, x, y, modulus, amount) {
 
     var average_x = 5;
     var average_y = 5;
@@ -11,7 +11,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	    if(mode[1] == 'down'){
 
-	        for (var i = 0; i < 15; i++) {
+	        for (var i = 0; i < amount; i++) {
 
 	            if (i % modulus[0] == 0) {
 
@@ -19,7 +19,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	            };
 
-	            if (i % modulus[1]) {
+	            if (i % modulus[1] == 0) {
 
 	                average_y--;
 
@@ -35,7 +35,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	    } else if(mode[1] == 'up'){
 
-	        for (var i = 0; i < 15; i++) {
+	        for (var i = 0; i < amount; i++) {
 
 	            if (i % modulus[0] == 0) {
 
@@ -43,7 +43,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	            };
 
-	            if (i % modulus[1]) {
+	            if (i % modulus[1]  == 0) {
 
 	                average_y--;
 
@@ -63,7 +63,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	    if(mode[1] == 'down'){
 
-	        for (var i = 0; i < 15; i++) {
+	        for (var i = 0; i < amount; i++) {
 
 	            if (i % modulus[0] == 0) {
 
@@ -71,7 +71,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	            };
 
-	            if (i % modulus[1]) {
+	            if (i % modulus[1] == 0) {
 
 	                average_y--;
 
@@ -87,7 +87,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	    } else if(mode[1] == 'up'){
 
-	        for (var i = 0; i < 15; i++) {
+	        for (var i = 0; i < amount; i++) {
 
 	            if (i % modulus[0] == 0) {
 
@@ -95,7 +95,7 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus) {
 
 	            };
 
-	            if (i % modulus[1]) {
+	            if (i % modulus[1] == 0) {
 
 	                average_y--;
 
@@ -157,7 +157,7 @@ function gen_mact(bmak){
 	//var modulus = get_modulus(amount, bmak);
 
 	var amount = [0];
-	var length = [5,10,15,20,30,50];
+	var length = [5,10,15,20,25,30,35,40,45,50];
 
 	while(amount.reduce((a,b) => {
 		return a + b;
@@ -183,12 +183,32 @@ function gen_mact(bmak){
 
 		};
 
+		if(amount.length > 20){
+
+			amount = [0];
+				
+		};
+
 	};
 
-	console.log(amount);
+	for(var s = 0; s < amount.length; s++){
 
-	//curve(bmak, ['left', 'down'], starting_x, starting_y, x, y, modulus);
-	//draw(x,y);
+		var modulus = get_modulus(amount[s],bmak);
+		var mode = [];
+		mode.push(Math.random() > 0.5 ? 'right' : 'left');
+		mode.push(Math.random() > 0.5 ? 'up' : 'down');
+
+		s == 0 ? curve(bmak, mode, starting_x, starting_y,x,y, modulus, amount[s]) : curve(bmak, mode, x[x.length - 1], y[y.length - 1],x,y, modulus, amount[s]);
+
+	};
+
+	Math.random() > 0.5 && (x.reverse() && y.reverse());
+
+	console.log(amount);
+	console.log(x);
+	console.log(y);
+
+	draw(x,y);
 
 };
 
