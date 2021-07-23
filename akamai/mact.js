@@ -200,7 +200,7 @@ function gen_mact(bmak){
 	};
 
 	Math.random() > 0.5 && (x.reverse() && y.reverse());	
-
+	
 };
 
 module.exports.gen_mact = gen_mact;
