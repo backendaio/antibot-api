@@ -266,7 +266,7 @@ function gen_kact(bmak) {
 
     //var events = bmak.random(bmak.ke_cnt, bmak.ke_cnt_lmt);
     //events -= bmak.ke_cnt;
-    var events = bmak.random(0,30);
+    var events = bmak.random(0,20);
 
     if (events <= 1) {
 

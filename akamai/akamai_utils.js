@@ -297,6 +297,7 @@ bmak.getforminfo = function() {
 
     var fnl_informinfo = "0,0,0,0,2402,310,0;0,0,0,0,1802,310,0;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,0;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,-1,1;0,-1,0,0,-1,520,0;0,-1,0,0,-1,520,0;";
     var dsg_informinfo = "0,-1,0,0,1227,-1,0;";
+    var fedex_informinfo = "0,-1,0,1,1386,447,0;1,0,0,1,1649,331,0;0,-1,0,0,1498,-1,0;0,-1,0,1,2588,1468,0;0,-1,0,1,-1,1500,0;0,-1,0,1,-1,1684,0;0,-1,0,1,-1,1684,0;0,-1,0,1,-1,1684,0;0,-1,0,1,2563,-1,0;";
 
     if (bmak.site == 'fnl') {
 
@@ -305,6 +306,10 @@ bmak.getforminfo = function() {
     } else if (bmak.site == 'dsg'){
 
         return dsg_informinfo;
+
+    } else if(bmak.site == 'fedex'){
+
+        return fedex_informinfo;
 
     };
 
@@ -315,14 +320,19 @@ bmak.getdurl = function() {
 
     var fnl_url = 'https://www.finishline.com/';
     var dsg_url = 'https://www.dickssportinggoods.com/';
+    var fedex_url = 'https://www.fedex.com/en-us/home.html';
 
     if (bmak.site == 'fnl') {
 
         return fnl_url;
 
-    } else {
+    } else if(bmak.site == 'dsg'){
 
         return dsg_url;
+
+    } else if(bmak.site == 'fedex'){
+
+        return fedex_url;
         
     };
 
@@ -335,7 +345,7 @@ bmak.updatet = function(amount) {
 
         bmak.timestamp = bmak.random(100, 1500);
 
-    } else if(amount){
+    } else if(amount || amount == 0){
 
         bmak.timestamp += amount;
 

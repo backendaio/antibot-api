@@ -90,15 +90,20 @@ async function fnl(data) {
         cookies = cookies.find(b => b.startsWith('_abck'));
         cookies = cookies.replace('_abck=', '');
 
-        console.log(cookies);
+        //console.log(cookies);
 
         if (cookies.endsWith('==~-1~-1~-1') && cookies.length == 533) {
 
             //console.log(cookies);
             process.env.cookies++
-            console.log(`FNL :`, process.env.cookies);
+
+        }else {
+
+            process.env.invalid_cookies++;
 
         };
+
+        console.log(`FNL :`, { valid : process.env.cookies, invalid : process.env.invalid_cookies });
 
     } catch {
 
@@ -188,19 +193,24 @@ async function dsg(data) {
         cookies = cookies.find(b => b.startsWith('_abck'));
         cookies = cookies.replace('_abck=', '');
 
-        console.log(cookies);
+        //console.log(cookies);
 
         if (cookies.length == 549) {
 
             //console.log(cookies);
             process.env.cookies++
-            console.log(`DSG :`, process.env.cookies);
 
-        };;
+        } else {
+
+            process.env.invalid_cookies++;
+
+        };
+
+        console.log(`DSG :`, { valid : process.env.cookies, invalid : process.env.invalid_cookies });
 
     } catch {
 
-        //console.log('error');
+        console.log('error');
 
     };
 
@@ -208,5 +218,105 @@ async function dsg(data) {
 
 };
 
+async function fedex(data){
+
+    try {
+
+        var device_index = random(0, 3000);
+        var proxy_index = random(0, proxies.length - 1);
+        var api = new akamai(device_index, 'fedex');
+        var request = new client(proxies[proxy_index]);
+        //var request = new client(null);
+
+        var get = await request.request({
+
+            method: 'get',
+            url: 'https://www.fedex.com/en-us/home.html',
+            headers: {
+
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-language": "en",
+                "cache-control": "no-cache",
+                "pragma": "no-cache",
+                "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-fetch-dest": "document",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "same-origin",
+                "sec-fetch-user": "?1",
+                "upgrade-insecure-requests": "1",
+                "referrer": "https://www.fedex.com/global/choose-location.html",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
+
+            },
+            credentials: 'include'
+
+        });
+
+        var cookies = get.headers['set-cookie'].find(b => b.startsWith('_abck'));
+        cookies = cookies.split(';');
+        cookies = cookies.find(b => b.startsWith('_abck'));
+        cookies = cookies.replace('_abck=', '');
+
+        var sensor_data = api.generate(cookies, device_index);
+        api.reset(data);
+
+        //console.log(sensor_data);
+
+        var post = await request.request({
+
+            method: 'post',
+            url: 'https://www.fedex.com/9xaVE9/krc43t/IHF1/7MCtBV/Rt/O51NDwcrm5k1/NkU-MiM/Rl5lHmg/mKGY',
+            headers: {
+
+                "accept": "*/*",
+                "accept-language": "en",
+                "cache-control": "no-cache",
+                "content-type": "text/plain;charset=UTF-8",
+                "pragma": "no-cache",
+                "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-site": "same-origin",
+                "referrer": "https://www.fedex.com/en-us/home.html",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
+
+            },
+            credentials: 'include',
+            body: `{\"sensor_data\":\"${sensor_data}\"}`
+
+        });
+
+        var cookies = post.headers['set-cookie'].find(b => b.startsWith('_abck'));
+        cookies = cookies.split(';');
+        cookies = cookies.find(b => b.startsWith('_abck'));
+        cookies = cookies.replace('_abck=', '');
+
+        if (cookies.length == 460) {
+
+            //console.log(cookies);
+            process.env.cookies++
+
+        } else {
+
+            process.env.invalid_cookies++;
+
+        };
+
+        console.log(`Fedex :`, { valid : process.env.cookies, invalid : process.env.invalid_cookies });
+
+    } catch {
+
+        //console.log('error');
+
+    };
+
+    await fedex(data);
+
+};
+
+module.exports.fedex = fedex;
 module.exports.fnl = fnl;
 module.exports.dsg = dsg;

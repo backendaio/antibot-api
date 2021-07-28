@@ -1,10 +1,11 @@
 const { app, ipcMain } = require('electron');
-const { fnl, dsg } = require('./task.js');
+const { fnl, dsg, fedex } = require('./task.js');
 const bmak = require('./akamai_utils.js');
 
 var data = {};
 
 process.env.cookies = 0;
+process.env.invalid_cookies = 0;
 var i = 0;
 
 Object.keys(bmak).map(b => {
@@ -15,9 +16,9 @@ Object.keys(bmak).map(b => {
 
 async function gen_akamai(data){
 
-	for(; i < 1; i++){
+	for(; i < 10; i++){
 
-		setImmediate(dsg, data);
+		setImmediate(fedex, data);
 
 	};
 

@@ -23,8 +23,6 @@ class akamai{
 
 		};
 
-		gen_mact(bmak);
-
 		if(device_index){
 
 			this.device_index = device_index;
@@ -178,6 +176,8 @@ class akamai{
         bmak.sensor_data += ";";
         bmak.sensor_data += 0;
 
+        bmak.aj_indx++;
+
 		return bmak.sensor_data;
 
 	};
@@ -198,9 +198,19 @@ class akamai{
 		
 	};
 
+	set(data){
+
+		Object.keys(data).map(s => {
+
+			bmak[s] = data[s];
+
+		});
+
+	};
+
 };
 
 module.exports = akamai;
 
-var api = new akamai(0, 'dsg');
-api.generate();
+//var api = new akamai(0, 'dsg');
+//api.generate();
