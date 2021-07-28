@@ -15,9 +15,9 @@ Object.keys(bmak).map(b => {
 
 async function gen_akamai(data){
 
-	for(; i < 50; i++){
+	for(; i < 1; i++){
 
-		setImmediate(fnl, data);
+		setImmediate(dsg, data);
 
 	};
 

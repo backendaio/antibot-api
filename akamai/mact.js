@@ -111,6 +111,42 @@ function curve(bmak, mode, starting_x, starting_y, x, y, modulus, amount) {
 
 	    };
 
+	};	
+
+};
+
+function has_negative(x,y){
+
+	var negative = false;
+
+	x.map((b) => {
+
+		if(b < 0){
+
+			negative = true;
+
+		};
+
+	});
+
+	y.map((b) => {
+
+		if(b < 0){
+
+			negative = true;
+
+		};
+
+	});
+
+	if(negative){
+
+		return true;
+
+	} else {
+
+		return false;
+
 	};
 
 };
@@ -153,8 +189,13 @@ function gen_mact(bmak){
 	var x = [];
 	var y = [];
 
+	Math.random() > 0.5 ? starting_x -= bmak.random(0, Math.floor(width / 5)) : starting_x += bmak.random(0, Math.floor(width / 5));
+	Math.random() > 0.5 ? starting_y -= bmak.random(0, Math.floor(height / 5)) : starting_y += bmak.random(0, Math.floor(height / 5));
+
 	var amount = [0];
 	var length = [5,10,15,20,25,30,35,40,45,50];
+
+	Math.random() > 0.5 && (length = [5,10,15,20,25,30,35,40,45,50,55,60,65,70]);
 
 	while(amount.reduce((a,b) => {
 		return a + b;
@@ -164,7 +205,7 @@ function gen_mact(bmak){
 			return a + b;
 		});
 
-		if(length.includes(100 - current_value)){
+		if(length.includes(100 - current_value) && Math.random() > 0.5){
 
 			amount.push(length[length.indexOf(100 - current_value)]);
 
@@ -199,9 +240,32 @@ function gen_mact(bmak){
 
 	};
 
+	if(has_negative(x,y)){
+
+		while(has_negative(x,y)){
+
+			x = [];
+			y = [];
+
+			for(var s = 0; s < amount.length; s++){
+
+				var modulus = get_modulus(amount[s],bmak);
+				var mode = [];
+				mode.push(Math.random() > 0.5 ? 'right' : 'left');
+				mode.push(Math.random() > 0.5 ? 'up' : 'down');
+
+				s == 0 ? curve(bmak, mode, starting_x, starting_y,x,y, modulus, amount[s]) : curve(bmak, mode, x[x.length - 1], y[y.length - 1],x,y, modulus, amount[s]);
+
+			};
+
+		};
+
+	};
+
 	Math.random() > 0.5 && (x.reverse() && y.reverse());
 
 	draw(x,y);
+
 };
 
 module.exports.gen_mact = gen_mact;

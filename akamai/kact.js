@@ -298,6 +298,7 @@ function gen_kact(bmak) {
 
     };
 
+    bmak.timestamp_array.push(bmak.timestamp);
     bmak.aj_type = 3;
     
 };

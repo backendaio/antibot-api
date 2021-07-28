@@ -90,6 +90,8 @@ async function fnl(data) {
         cookies = cookies.find(b => b.startsWith('_abck'));
         cookies = cookies.replace('_abck=', '');
 
+        console.log(cookies);
+
         if (cookies.endsWith('==~-1~-1~-1') && cookies.length == 533) {
 
             //console.log(cookies);
@@ -185,6 +187,8 @@ async function dsg(data) {
         cookies = cookies.split(';');
         cookies = cookies.find(b => b.startsWith('_abck'));
         cookies = cookies.replace('_abck=', '');
+
+        console.log(cookies);
 
         if (cookies.length == 549) {
 
