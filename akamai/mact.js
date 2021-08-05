@@ -221,7 +221,7 @@ function gen_mact(bmak){
 
 		};
 
-		if(amount.length > 20){
+		if(amount.length > 20 || amount.length > 8){
 
 			amount = [0];
 				
