@@ -1,4 +1,4 @@
-const plotly = require('plotly')('sneakerbot', 'e4Z72ivtwvdkXPseBUsf');
+const plotly = require('plotly')('bachthegenius', 'y7JCOAeMZvyDqEO5Fg8y');
 
 function draw(x, y){
 
